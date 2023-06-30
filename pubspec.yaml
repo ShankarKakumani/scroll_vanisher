@@ -1,6 +1,6 @@
 name: scroll_vanisher
 description: Widget, that can make any widget vanish based on scroll direction.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/ShankarKakumani/scroll_vanisher.git
 
 environment:

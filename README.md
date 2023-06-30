@@ -1,5 +1,3 @@
-Sure, here is the updated README in Markdown format:
-
 ```markdown
 # ScrollVanisher
 
