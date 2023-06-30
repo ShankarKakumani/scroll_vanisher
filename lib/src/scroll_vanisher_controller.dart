@@ -1,19 +1,25 @@
 //
-// Copyright 2021-2022 present Insolite. All rights reserved.
-// Use of this source code is governed by Apache 2.0 license
+// Copyright (c) 2023 Shankar Kakumani. All rights reserved.
+// Use of this source code is governed by MIT license
 // that can be found in the LICENSE file.
 //
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:scroll_vanisher/scroll_vanisher.dart';
+import 'package:scroll_vanisher/src/scroll_vanisher_direction.dart';
 
 /// Simple extension to generate [VanisherController] from scroll controller instance directly.
 extension VanisherControllerExtension on ScrollController {
   static final hidableControllers = <int, VanisherController>{};
 
   /// Shortcut way of creating hidable controller
-  VanisherController vanisher() {
+  VanisherController vanisher(
+    ScrollVanisherDirection scrollVanisherDirection,
+    bool resetStateWhenScrolledToStart,
+    double startingOffset,
+  ) {
     // If the same instance was created before, we should keep using it.
     if (hidableControllers.containsKey(hashCode)) {
       return hidableControllers[hashCode]!;
@@ -21,6 +27,9 @@ extension VanisherControllerExtension on ScrollController {
 
     return hidableControllers[hashCode] = VanisherController(
       scrollController: this,
+      scrollVanisherDirection: scrollVanisherDirection,
+      resetStateWhenScrolledToStart: resetStateWhenScrolledToStart,
+      startingOffset: startingOffset,
     );
   }
 }
@@ -28,13 +37,20 @@ extension VanisherControllerExtension on ScrollController {
 /// A custom wrapper for scroll controller.
 ///
 /// Implements the main listener method for [ScrollController].
-/// And the [sizeNotifier] for providing/updating the hideable status.
+/// And the [sizeNotifier] for providing/updating the Vanisher status.
 class VanisherController {
   /// The main scroll controller.
+  /// The main scroll controller.
   ScrollController scrollController;
+  ScrollVanisherDirection scrollVanisherDirection;
+  bool resetStateWhenScrolledToStart;
+  double startingOffset;
 
   VanisherController({
     required this.scrollController,
+    required this.scrollVanisherDirection,
+    required this.resetStateWhenScrolledToStart,
+    this.startingOffset = 0,
   }) {
     scrollController.addListener(listener);
   }

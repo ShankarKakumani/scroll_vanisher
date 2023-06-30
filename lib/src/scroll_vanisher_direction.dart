@@ -1,0 +1,4 @@
+enum ScrollVanisherDirection {
+  forward,
+  reverse,
+}

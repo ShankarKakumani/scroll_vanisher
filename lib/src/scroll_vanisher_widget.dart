@@ -1,22 +1,23 @@
 //
-// Copyright 2021-2022 present Insolite. All rights reserved.
-// Use of this source code is governed by Apache 2.0 license
+// Copyright (c) 2023 Shankar Kakumani. All rights reserved.
+// Use of this source code is governed by MIT license
 // that can be found in the LICENSE file.
 //
 
 import 'package:flutter/material.dart';
 import 'package:scroll_vanisher/src/scroll_vanisher_controller.dart';
+import 'package:scroll_vanisher/src/scroll_vanisher_direction.dart';
 
-/// Hidable is a widget that makes any static located widget hideable while scrolling.
+/// ScrollVanisher is a widget that makes any static located widget vanish while scrolling.
 ///
 /// To Use:
 /// Wrap your static located widget with [ScrollVanisher],
 /// then your widget will support scroll to hide/show feature.
 ///
 /// Note: scroll controller that you give to [ScrollVanisher], also must be given to your scrollable widget,
-/// It could, [ListView], [GridView], etc.
+/// It could, [ListView], [GridView], [SingleChildScrollView] etc.
 ///
-/// #### For more information refer to - [documentation](https://github.com/insolite-dev/hidable#readme)
+
 class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
   /// Child widget, which you want to add scroll-to-hide effect to it.
   ///
@@ -55,6 +56,12 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
   /// Defaults to [Curves.linear].
   final Curve replacementCurve;
 
+  final bool resetStateWhenScrolledToStart;
+
+  final double startingOffset;
+
+  final ScrollVanisherDirection scrollVanisherDirection;
+
   const ScrollVanisher({
     Key? key,
     required this.child,
@@ -65,6 +72,9 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
     this.replacementDuration,
     this.childCurve = Curves.linear,
     this.replacementCurve = Curves.linear,
+    this.scrollVanisherDirection = ScrollVanisherDirection.forward,
+    this.resetStateWhenScrolledToStart = true,
+    this.startingOffset = 0,
   }) : super(key: key);
 
   @override
@@ -72,7 +82,11 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vanisher = controller.vanisher();
+    final vanisher = controller.vanisher(
+      scrollVanisherDirection,
+      resetStateWhenScrolledToStart,
+      startingOffset,
+    );
 
     return ValueListenableBuilder<double>(
       valueListenable: vanisher.sizeNotifier,
@@ -90,6 +104,7 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  /// Determines the state of the cross fade based on the provided factor.
   CrossFadeState getCrossFadeState(double factor) {
     if (factor >= 1) {
       return CrossFadeState.showFirst;
