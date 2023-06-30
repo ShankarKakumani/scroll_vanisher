@@ -1,39 +1,84 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+Sure, here is the updated README in Markdown format:
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+```markdown
+# ScrollVanisher
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+ScrollVanisher is a Flutter package that allows any widget to vanish while scrolling. This package is perfect for creating a clean and minimalistic user interface by hiding widgets when they are not in use.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- Hide any widget while scrolling.
+- Customize the duration and curve of the hide/show animation.
+- Choose the direction of the scroll that triggers the hide/show effect.
+- Reset the state of the widget when scrolled to the start.
 
-## Getting started
+## Getting Started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use this package, follow the below instructions.
 
-## Usage
+### Installation
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Add this to your package's `pubspec.yaml` file:
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  scroll_vanisher: ^1.0.0
 ```
 
-## Additional information
+Then install packages from the command line:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+$ flutter pub get
+```
+
+Now in your Dart code, you can use:
+
+```dart
+import 'package:scroll_vanisher/scroll_vanisher.dart';
+```
+
+### Usage
+
+Wrap your widget with `ScrollVanisher`, then your widget will support scroll to hide/show feature. The scroll controller that you give to `ScrollVanisher`, also must be given to your scrollable widget, It could be `ListView`, `GridView`, `SingleChildScrollView` etc.
+
+Here is a basic example:
+
+```dart
+ScrollVanisher(
+  child: AppBar(
+    title: Text('Scroll Vanisher'),
+  ),
+  controller: _scrollController,
+);
+```
+
+In the above example, the `AppBar` will vanish when the user scrolls the `ListView`, `GridView`, or `SingleChildScrollView` that is attached to `_scrollController`.
+
+### Customization
+
+You can customize the `ScrollVanisher` with the following parameters:
+
+- `child`: The widget you want to add the scroll-to-hide effect to.
+- `controller`: The main scroll controller to listen to user's scrolls.
+- `replacement`: The widget that will replace the `child` when it's hidden.
+- `preferredWidgetSize`: The preferred size of the `ScrollVanisher`.
+- `childDuration`: The duration of the hide/show animation.
+- `replacementDuration`: The duration of the replacement animation.
+- `childCurve`: The fade curve of the `child`.
+- `replacementCurve`: The fade curve of the `replacement`.
+- `scrollVanisherDirection`: The direction of the scroll that triggers the hide/show effect.
+- `resetStateWhenScrolledToStart`: Whether to reset the state of the widget when scrolled to the start.
+- `startingOffset`: The starting offset of the scroll.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Shankar Kakumani - [GitHub](https://github.com/ShankarKakumani)
+
+## Acknowledgments
+
+Thanks to the Flutter community for the continuous support and inspiration.
+```

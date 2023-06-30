@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:scroll_vanisher/src/scroll_vanisher_controller.dart';
 import 'package:scroll_vanisher/src/scroll_vanisher_direction.dart';
 
-/// ScrollVanisher is a widget that makes any static located widget vanish while scrolling.
+/// ScrollVanisher is a widget that makes any widget vanish while scrolling.
 ///
 /// To Use:
-/// Wrap your static located widget with [ScrollVanisher],
+/// Wrap your widget with [ScrollVanisher],
 /// then your widget will support scroll to hide/show feature.
 ///
 /// Note: scroll controller that you give to [ScrollVanisher], also must be given to your scrollable widget,
@@ -21,7 +21,7 @@ import 'package:scroll_vanisher/src/scroll_vanisher_direction.dart';
 class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
   /// Child widget, which you want to add scroll-to-hide effect to it.
   ///
-  /// It should be static located widget:
+  /// It can be any widget:
   /// [BottomNavigationBar], [FloatingActionButton], [AppBar] etc.
   final Widget child;
 
