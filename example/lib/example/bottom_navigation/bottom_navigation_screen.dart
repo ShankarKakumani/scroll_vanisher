@@ -10,17 +10,13 @@ class BottomNavigationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       bottomNavigationBar: getBottomNavRow(context),
-      body: SafeArea(
-        top: false,
-        bottom: false,
-        child: PageView(
-          controller: PageController(),
-          onPageChanged: (page) {},
-          physics: const NeverScrollableScrollPhysics(),
-          children: getBottomNavPages(),
-        ),
+      body: PageView(
+        controller: PageController(),
+        onPageChanged: (page) {},
+        physics: const NeverScrollableScrollPhysics(),
+        children: getBottomNavPages(),
       ),
     );
   }
@@ -36,10 +32,24 @@ class BottomNavigationScreen extends StatelessWidget {
       startingOffset: 0,
       controller: pageOneScrollController,
       scrollVanisherDirection: ScrollVanisherDirection.forward,
-      child: Container(
-        height: 56 + MediaQuery.of(context).padding.bottom,
-        color: Colors.white,
-        width: double.infinity,
+      child: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.amber[800],
+        onTap: (index) {},
       ),
     );
   }
