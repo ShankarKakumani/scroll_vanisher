@@ -1,3 +1,3 @@
-## 1.0.2
+## 1.0.3
 
-* initial release.
+* added isEnabled parameter to have control to enable the vanish mode on specific conditions.

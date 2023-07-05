@@ -62,6 +62,8 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
 
   final ScrollVanisherDirection scrollVanisherDirection;
 
+  final bool isEnabled;
+
   const ScrollVanisher({
     Key? key,
     required this.child,
@@ -75,6 +77,7 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
     this.scrollVanisherDirection = ScrollVanisherDirection.forward,
     this.resetStateWhenScrolledToStart = true,
     this.startingOffset = 0,
+    this.isEnabled = true
   }) : super(key: key);
 
   @override
@@ -106,7 +109,7 @@ class ScrollVanisher extends StatelessWidget implements PreferredSizeWidget {
 
   /// Determines the state of the cross fade based on the provided factor.
   CrossFadeState getCrossFadeState(double factor) {
-    if (factor >= 1) {
+    if (factor >= 1 || !isEnabled) {
       return CrossFadeState.showFirst;
     } else {
       return CrossFadeState.showSecond;

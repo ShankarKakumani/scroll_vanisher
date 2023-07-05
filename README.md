@@ -1,11 +1,10 @@
-```markdown
 # ScrollVanisher
 
-ScrollVanisher is a Flutter package that allows any widget to vanish while scrolling. This package is perfect for creating a clean and minimalistic user interface by hiding widgets when they are not in use.
+ScrollVanisher is a Flutter package that allows any widget to vanish while scrolling. This package is perfect for creating a clean and minimalistic user interface by vanishing widgets as user scrolls.
 
 ## Features
 
-- Hide any widget while scrolling.
+- Vanish/Hide any widget while scrolling.
 - Customize the duration and curve of the hide/show animation.
 - Choose the direction of the scroll that triggers the hide/show effect.
 - Reset the state of the widget when scrolled to the start.
@@ -13,6 +12,7 @@ ScrollVanisher is a Flutter package that allows any widget to vanish while scrol
 ## Getting Started
 
 To use this package, follow the below instructions.
+
 
 ### Installation
 
@@ -43,10 +43,10 @@ Here is a basic example:
 
 ```dart
 ScrollVanisher(
+  controller: _scrollController,
   child: AppBar(
     title: Text('Scroll Vanisher'),
   ),
-  controller: _scrollController,
 );
 ```
 
@@ -67,16 +67,14 @@ You can customize the `ScrollVanisher` with the following parameters:
 - `scrollVanisherDirection`: The direction of the scroll that triggers the hide/show effect.
 - `resetStateWhenScrolledToStart`: Whether to reset the state of the widget when scrolled to the start.
 - `startingOffset`: The starting offset of the scroll.
+- `isEnabled`: To control the vanish functionality.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Author
 
-Shankar Kakumani - [GitHub](https://github.com/ShankarKakumani)
+## Acknowledgements
 
-## Acknowledgments
+This project was inspired by the [`hidable`](https://pub.dev/packages/hidable) library, developed by [insolite.io](https://pub.dev/publishers/insolite.io). We used the code from the `hidable` library as a foundation to build upon and extend its functionality to meet our project's requirements.
 
-Thanks to the Flutter community for the continuous support and inspiration.
-```

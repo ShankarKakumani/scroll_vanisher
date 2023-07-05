@@ -65,7 +65,7 @@ class VanisherController {
   /// static-located-widget appearing status. (0 = closed) and (1 = opened).
   void listener() {
     final p = scrollController.position;
-    if (scrollController.offset <= p.minScrollExtent) {
+    if (scrollController.offset <= p.minScrollExtent && resetStateWhenScrolledToStart) {
       sizeNotifier.value = 1.0;
       return;
     }
